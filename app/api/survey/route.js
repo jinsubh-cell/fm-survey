@@ -7,10 +7,10 @@ export async function POST(request) {
 
     await insertResponse({
       q1_overall: body.q1_overall,
-      q2_venue: body.q2_venue || null,
-      q3_ceremony: body.q3_ceremony || null,
-      q4_production: body.q4_production || null,
-      q5_food: body.q5_food || null,
+      q2_venue: body.q2_venue,
+      q3_ceremony: body.q3_ceremony,
+      q4_production: body.q4_production,
+      q5_food: body.q5_food,
       q6_best_programs: body.q6_best_programs?.length > 0 ? JSON.stringify(body.q6_best_programs) : null,
       q7_good_points: body.q7_good_points || null,
       q8_improvements: body.q8_improvements?.length > 0 ? JSON.stringify(body.q8_improvements) : null,

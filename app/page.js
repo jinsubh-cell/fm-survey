@@ -59,8 +59,9 @@ export default function SurveyPage() {
   const progress = Math.round((completedCount() / totalQ) * 100);
 
   const handleSubmit = async () => {
-    if (!answers.q1) return alert('행사 전반 만족도를 선택해 주세요 (Q1)');
-    if (answers.q10 === null) return alert('추천 지수를 선택해 주세요 (Q10)');
+    if (!answers.q1 || !answers.q2 || !answers.q3 || !answers.q4 || !answers.q5 || answers.q10 === null) {
+      return alert('1번~5번, 10번 문항은 필수입니다.');
+    }
 
     setSubmitting(true);
     try {
@@ -132,10 +133,10 @@ export default function SurveyPage() {
       <div style={styles.sectionLabel}>전반적 행사 평가</div>
 
       <ScaleQuestion label="Q1. 이번 행사 전반에 대한 만족도는?" required value={answers.q1} onChange={v => setScale('q1', v)} />
-      <ScaleQuestion label="Q2. 행사장 (장소·시설·접근성) 만족도는?" value={answers.q2} onChange={v => setScale('q2', v)} />
-      <ScaleQuestion label="Q3. 시상식 진행 (MC·순서·시간) 만족도는?" value={answers.q3} onChange={v => setScale('q3', v)} />
-      <ScaleQuestion label="Q4. 무대·영상·음향 등 연출 만족도는?" value={answers.q4} onChange={v => setScale('q4', v)} />
-      <ScaleQuestion label="Q5. 식음료 (식사·음료·다과) 만족도는?" value={answers.q5} onChange={v => setScale('q5', v)} />
+      <ScaleQuestion label="Q2. 행사장 (장소·시설·접근성) 만족도는?" required value={answers.q2} onChange={v => setScale('q2', v)} />
+      <ScaleQuestion label="Q3. 시상식 진행 (MC·순서·시간) 만족도는?" required value={answers.q3} onChange={v => setScale('q3', v)} />
+      <ScaleQuestion label="Q4. 무대·영상·음향 등 연출 만족도는?" required value={answers.q4} onChange={v => setScale('q4', v)} />
+      <ScaleQuestion label="Q5. 식음료 (식사·음료·다과) 만족도는?" required value={answers.q5} onChange={v => setScale('q5', v)} />
 
       {/* Section: 좋았던 점 */}
       <div style={styles.sectionLabel}>특별히 좋았던 점</div>
