@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const BEST_PROGRAMS = [
   '수상자 발표 및 시상식',
@@ -30,6 +30,13 @@ export default function SurveyPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [alreadyDone, setAlreadyDone] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('fm_survey_done') === 'true') {
+      setAlreadyDone(true);
+    }
+  }, []);
 
   const setScale = (q, val) => setAnswers(p => ({ ...p, [q]: val }));
   const toggleMulti = (q, item) => {
@@ -83,6 +90,7 @@ export default function SurveyPage() {
         }),
       });
       if (!res.ok) throw new Error('제출 실패');
+      localStorage.setItem('fm_survey_done', 'true');
       setSubmitted(true);
     } catch (e) {
       alert('설문 제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
@@ -90,6 +98,26 @@ export default function SurveyPage() {
       setSubmitting(false);
     }
   };
+
+  if (alreadyDone) {
+    return (
+      <div style={styles.wrapper}>
+        <div style={styles.thankCard}>
+          <div style={styles.checkIcon}>✓</div>
+          <h2 style={{ fontSize: 18, fontWeight: 500, margin: '0 0 8px', color: '#2C2C2A' }}>이미 설문을 완료하셨습니다. 감사합니다!</h2>
+          <p style={{ fontSize: 14, color: '#5F5E5A', margin: '0 0 1rem', lineHeight: 1.6 }}>
+            소중한 의견에 감사드립니다.
+          </p>
+          <button
+            onClick={() => window.location.href = 'https://www.fmac.co.kr'}
+            style={styles.confirmBtn}
+          >
+            확인
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (submitted) {
     return (
