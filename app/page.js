@@ -100,6 +100,12 @@ export default function SurveyPage() {
             소중한 의견 감사합니다.<br />여러분의 피드백으로 더 나은 행사를 만들겠습니다.
           </p>
           <p style={{ fontSize: 13, color: '#888780', margin: '1rem 0 0' }}>2025 FM Asset 연도대상 수상을 축하드립니다!</p>
+          <button
+            onClick={() => window.location.href = 'https://www.fmac.co.kr'}
+            style={styles.confirmBtn}
+          >
+            확인
+          </button>
         </div>
       </div>
     );
@@ -248,4 +254,5 @@ const styles = {
   progressFill: { height: '100%', background: '#185FA5', borderRadius: 2, transition: 'width 0.3s' },
   thankCard: { background: '#ffffff', border: '1px solid #D3D1C7', borderRadius: 12, padding: '2rem 1.25rem', textAlign: 'center', marginTop: '2rem' },
   checkIcon: { width: 56, height: 56, borderRadius: '50%', background: '#E1F5EE', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', fontSize: 24, color: '#1D9E75', fontWeight: 500 },
+  confirmBtn: { marginTop: '1.5rem', padding: '12px 48px', background: '#185FA5', color: '#ffffff', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 500, cursor: 'pointer' },
 };
